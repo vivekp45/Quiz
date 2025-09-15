@@ -81,7 +81,7 @@
     <h1>🚀 IoT Knowledge Quiz</h1>
     <p class="subtitle">Answer 7 questions to test your IoT skills 💡</p>
     <form id="quizForm"></form>
-    <button onclick="submitQuiz()">Submit Quiz ✅</button>
+    <button onclick="submitQuiz()" type="button">Submit Quiz ✅</button>
   </div>
 
   <script>
@@ -93,38 +93,31 @@
       { q: "IoT devices usually connect to cloud through?", options: ["Bluetooth", "Internet", "CD Drive"], answer: "Internet" },
       { q: "Which sensor is used to measure temperature in IoT?", options: ["LM35", "LDR", "MQ135"], answer: "LM35" },
       { q: "Which communication module is used in IoT for SIM-based internet?", options: ["ESP8266", "SIM800L", "HC-05"], answer: "SIM800L" },
-      { q: "Which company developed Arduino?", options: ["Intel", "Massimo Banzi & team", "Microsoft"], answer: "Massimo Banzi & team" },
-      { q: "Which wireless technology is widely used in smart homes?", options: ["Zigbee", "CDMA", "DSL"], answer: "Zigbee" },
-      { q: "What does MQTT stand for?", options: ["Message Queue Telemetry Transport", "Multi Query Transfer Tool", "Main Queue Transfer Text"], answer: "Message Queue Telemetry Transport" },
-      { q: "Which IoT board has Wi-Fi built in?", options: ["Arduino Uno", "ESP32", "Raspberry Pi Pico"], answer: "ESP32" },
-      { q: "Which gas sensor is used for air quality monitoring?", options: ["MQ135", "DHT11", "BMP180"], answer: "MQ135" },
-      { q: "Which memory is non-volatile?", options: ["RAM", "ROM", "Cache"], answer: "ROM" },
-      { q: "Which layer of IoT architecture includes sensors?", options: ["Perception Layer", "Network Layer", "Application Layer"], answer: "Perception Layer" },
-      { q: "Which is an example of wearable IoT?", options: ["Fitbit", "MS Word", "Photoshop"], answer: "Fitbit" },
-      { q: "What does RFID stand for?", options: ["Radio Frequency Identification", "Random File ID", "Rapid Function IoT Device"], answer: "Radio Frequency Identification" },
-      { q: "Which of these is a low-power IoT network protocol?", options: ["LoRaWAN", "Ethernet", "HDMI"], answer: "LoRaWAN" },
-      { q: "Which IoT device is used in agriculture?", options: ["Soil Moisture Sensor", "CD Drive", "Scanner"], answer: "Soil Moisture Sensor" },
-      { q: "Which board is more powerful than Arduino Uno?", options: ["ESP32", "MS Paint", "Notepad"], answer: "ESP32" },
-      { q: "Which software is used to program Arduino?", options: ["Arduino IDE", "MS PowerPoint", "Photoshop"], answer: "Arduino IDE" },
-      { q: "Which IoT application helps in smart cities?", options: ["Smart Traffic Management", "Word Processor", "CD Burning"], answer: "Smart Traffic Management" },
-      { q: "Which pin type on Arduino is used for analog input?", options: ["A0–A5", "D0–D13", "RX–TX"], answer: "A0–A5" },
-      { q: "Which company developed Raspberry Pi?", options: ["Raspberry Pi Foundation", "Intel", "Dell"], answer: "Raspberry Pi Foundation" },
+      { q: "Which IoT board is perfect for beginners to make smart home projects?", options: ["Arduino Uno", "ESP32", "Raspberry Pi"], answer: "Arduino Uno" },
+      { q: "Which wearable device can track heart rate for IoT health projects?", options: ["Fitbit", "MS Word", "Photoshop"], answer: "Fitbit" },
+      { q: "Which sensor is used for detecting soil moisture in smart agriculture?", options: ["Soil Moisture Sensor", "DHT11", "BMP180"], answer: "Soil Moisture Sensor" },
+      { q: "Which IoT wireless tech is energy efficient for smart city projects?", options: ["Zigbee", "CDMA", "DSL"], answer: "Zigbee" },
       { q: "Which IoT protocol works on publish-subscribe model?", options: ["MQTT", "HTTP", "FTP"], answer: "MQTT" },
-      { q: "Which sensor detects light intensity?", options: ["LDR", "LM35", "BMP180"], answer: "LDR" }
+      { q: "Which software is used to program Arduino?", options: ["Arduino IDE", "MS PowerPoint", "Photoshop"], answer: "Arduino IDE" },
+      { q: "Which IoT device helps monitor air quality?", options: ["MQ135", "LM35", "LDR"], answer: "MQ135" },
+      { q: "Which sensor detects light intensity for smart lighting?", options: ["LDR", "DHT11", "BMP180"], answer: "LDR" },
+      { q: "IoT workshops help students learn skills in?", options: ["Hands-on electronics & coding", "Painting", "Singing"], answer: "Hands-on electronics & coding" },
+      { q: "Which company developed Raspberry Pi?", options: ["Raspberry Pi Foundation", "Intel", "Dell"], answer: "Raspberry Pi Foundation" },
+      { q: "Which board has built-in Wi-Fi and is beginner-friendly?", options: ["ESP32", "Arduino Uno", "Raspberry Pi Pico"], answer: "ESP32" },
+      { q: "Which IoT application helps make cities smarter?", options: ["Smart Traffic Management", "Word Processor", "CD Burning"], answer: "Smart Traffic Management" },
+      { q: "Which pin on Arduino is used for analog input?", options: ["A0–A5", "D0–D13", "RX–TX"], answer: "A0–A5" }
     ];
 
-    // Pick 7 random
+    // Pick 7 random questions
     const shuffled = questions.sort(() => 0.5 - Math.random()).slice(0, 7);
 
-    // Render
+    // Render the quiz
     const form = document.getElementById("quizForm");
     shuffled.forEach((q, i) => {
       const div = document.createElement("div");
       div.innerHTML = `
         <p class="question">${i+1}. ${q.q}</p>
-        ${q.options.map(opt => `
-          <label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label>
-        `).join("")}
+        ${q.options.map(opt => `<label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label>`).join("")}
       `;
       form.appendChild(div);
     });
@@ -134,20 +127,19 @@
       shuffled.forEach((q, i) => {
         const selected = document.querySelector(`input[name="q${i}"]:checked`);
         if (selected) {
-          if (selected.value === q.answer) {
-            score++;
-          } else {
-            results.push({question: q.q, correct: q.answer, chosen: selected.value});
-          }
+          if (selected.value === q.answer) score++;
+          else results.push({question: q.q, correct: q.answer, chosen: selected.value});
         } else {
           results.push({question: q.q, correct: q.answer, chosen: "Not answered"});
         }
       });
 
+      // Save results in localStorage
       localStorage.setItem("quizScore", score);
       localStorage.setItem("quizTotal", shuffled.length);
       localStorage.setItem("quizReview", JSON.stringify(results));
 
+      // Redirect to result page
       window.location.href = "result.html";
     }
   </script>

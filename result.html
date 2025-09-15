@@ -2,14 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Quiz Results</title>
+  <title>Quiz Results 🚀</title>
   <style>
-    body { font-family: 'Poppins', sans-serif; background: #eef7ff; text-align: center; }
-    .result-box { background: white; width: 70%; margin: 40px auto; padding: 20px; border-radius: 15px; box-shadow: 0px 5px 20px rgba(0,0,0,0.1); }
-    h1 { color: #0077cc; }
-    .review { text-align: left; margin-top: 20px; }
-    a { color: #0077cc; text-decoration: none; font-weight: bold; }
-    a:hover { text-decoration: underline; }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #6EE7B7 0%, #3B82F6 100%);
+      margin: 0; padding: 0;
+      display: flex; justify-content: center; align-items: center;
+      min-height: 100vh;
+    }
+    .result-box {
+      background: #fff;
+      width: 90%; max-width: 700px;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0px 10px 30px rgba(0,0,0,0.15);
+      animation: fadeIn 1s ease-in-out;
+      text-align: center;
+    }
+    h1 {
+      color: #3B82F6;
+      margin-bottom: 10px;
+    }
+    #score {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #111;
+    }
+    .review {
+      text-align: left;
+      margin-top: 20px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .review ul { padding-left: 20px; }
+    .review li {
+      background: #f4f9ff;
+      padding: 10px 15px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      transition: transform 0.2s ease-in-out;
+    }
+    .review li:hover { transform: scale(1.02); background: #dbeafe; }
+    a {
+      display: inline-block;
+      color: #fff;
+      background: linear-gradient(135deg, #3B82F6, #2563EB);
+      padding: 10px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      margin: 5px;
+      transition: all 0.2s ease-in-out;
+    }
+    a:hover {
+      background: linear-gradient(135deg, #2563EB, #1D4ED8);
+      transform: translateY(-2px);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
@@ -18,9 +72,11 @@
     <p id="score"></p>
     <div id="review" class="review"></div>
     <h3>👉 Want to learn more? Join our IoT Workshop!</h3>
-    <p><a href="https://vierp.institute-link" target="_blank">Go to VIERP</a></p>
+    <p>
+      <a href="https://vierp.institute-link" target="_blank">Go to VIERP</a>
+    </p>
     <p>Follow us on: 
-      <a href="https://instagram.com/yourhandle" target="_blank">Instagram</a> | 
+      <a href="https://instagram.com/yourhandle" target="_blank">Instagram</a>
       <a href="https://linkedin.com/in/yourhandle" target="_blank">LinkedIn</a>
     </p>
   </div>
@@ -32,11 +88,11 @@
 
     document.getElementById("score").textContent = `You scored ${score} / ${total}`;
 
-    let reviewHtml = "<h3>Answer Review:</h3><ul>";
+    let reviewHtml = "<ul>";
     review.forEach(r => {
-      reviewHtml += `<li><b>Q:</b> ${r.question} <br>
-      <b>Your Answer:</b> ${r.chosen} <br>
-      <b>Correct Answer:</b> ${r.correct}</li><br>`;
+      reviewHtml += `<li><b>Q:</b> ${r.question}<br>
+      <b>Your Answer:</b> ${r.chosen}<br>
+      <b>Correct Answer:</b> ${r.correct}</li>`;
     });
     reviewHtml += "</ul>";
 

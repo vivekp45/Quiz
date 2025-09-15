@@ -2,132 +2,90 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IoT Workshop Quiz</title>
+  <title>IoT Quiz</title>
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #6EE7B7, #3B82F6);
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-    }
-    .quiz-box {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 20px;
-      border-radius: 20px;
-      max-width: 600px;
-      margin: auto;
-      box-shadow: 0px 8px 20px rgba(0,0,0,0.3);
-    }
-    h1 {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-    .question {
-      margin: 15px 0;
-      font-size: 18px;
-      text-align: left;
-    }
-    label {
-      display: block;
-      background: rgba(255, 255, 255, 0.1);
-      margin: 8px;
-      padding: 10px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    label:hover {
-      background: rgba(255, 255, 255, 0.3);
-    }
-    button {
-      margin-top: 20px;
-      padding: 12px 24px;
-      font-size: 18px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      background: #FACC15;
-      color: #000;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    button:hover {
-      background: #FBBF24;
-    }
-    #result {
-      margin-top: 25px;
-      font-size: 20px;
-      font-weight: bold;
-    }
+    body { font-family: 'Poppins', sans-serif; background: #f4f9ff; text-align: center; }
+    .quiz-box { background: white; width: 60%; margin: 40px auto; padding: 20px; border-radius: 15px; box-shadow: 0px 5px 20px rgba(0,0,0,0.1); }
+    h1 { color: #0077cc; }
+    button { padding: 10px 20px; border: none; border-radius: 8px; background: #0077cc; color: white; cursor: pointer; margin-top: 20px; }
+    button:hover { background: #005fa3; }
+    .question { font-weight: bold; margin: 15px 0; }
   </style>
 </head>
 <body>
   <div class="quiz-box">
-    <h1>🔥 IoT Quick Quiz 🔥</h1>
-    <form id="quizForm">
-
-      <div class="question">
-        <p>1. What does IoT stand for?</p>
-        <label><input type="radio" name="q1" value="wrong"> Internet of Technology</label>
-        <label><input type="radio" name="q1" value="correct"> Internet of Things</label>
-        <label><input type="radio" name="q1" value="wrong"> Intelligent Online Tools</label>
-      </div>
-
-      <div class="question">
-        <p>2. Which protocol is commonly used in IoT devices for lightweight messaging?</p>
-        <label><input type="radio" name="q2" value="wrong"> HTTP</label>
-        <label><input type="radio" name="q2" value="correct"> MQTT</label>
-        <label><input type="radio" name="q2" value="wrong"> SMTP</label>
-      </div>
-
-      <div class="question">
-        <p>3. Which of these is an IoT application in agriculture?</p>
-        <label><input type="radio" name="q3" value="correct"> Smart irrigation systems</label>
-        <label><input type="radio" name="q3" value="wrong"> Social media apps</label>
-        <label><input type="radio" name="q3" value="wrong"> Video streaming</label>
-      </div>
-
-      <div class="question">
-        <p>4. Which microcontroller is widely used in IoT projects?</p>
-        <label><input type="radio" name="q4" value="wrong"> Pentium Processor</label>
-        <label><input type="radio" name="q4" value="correct"> Arduino / ESP32</label>
-        <label><input type="radio" name="q4" value="wrong"> Graphics Card</label>
-      </div>
-
-      <div class="question">
-        <p>5. In IoT, sensors are used to…</p>
-        <label><input type="radio" name="q5" value="correct"> Collect data from the environment</label>
-        <label><input type="radio" name="q5" value="wrong"> Play music</label>
-        <label><input type="radio" name="q5" value="wrong"> Edit videos</label>
-      </div>
-
-      <button type="button" onclick="checkQuiz()">Submit Answers</button>
-    </form>
-
-    <div id="result"></div>
+    <h1>🚀 IoT Knowledge Quiz</h1>
+    <form id="quizForm"></form>
+    <button onclick="submitQuiz()">Submit</button>
   </div>
 
   <script>
-    function checkQuiz() {
-      let correct = 0;
-      let total = 5;
-      let answers = document.querySelectorAll("input[type=radio]:checked");
-      answers.forEach(ans => {
-        if(ans.value === "correct") correct++;
+    const questions = [
+      { q: "Which protocol is most commonly used in IoT?", options: ["HTTP", "MQTT", "FTP"], answer: "MQTT" },
+      { q: "Which of these is NOT an IoT application?", options: ["Smart Home", "Wearables", "MS Word"], answer: "MS Word" },
+      { q: "What does IoT stand for?", options: ["Internet of Things", "Internet of Technology", "Input of Transistors"], answer: "Internet of Things" },
+      { q: "Which device is commonly used as a microcontroller in IoT?", options: ["Arduino", "MS Excel", "Photoshop"], answer: "Arduino" },
+      { q: "IoT devices usually connect to cloud through?", options: ["Bluetooth", "Internet", "CD Drive"], answer: "Internet" },
+      { q: "Which sensor is used to measure temperature in IoT?", options: ["LM35", "LDR", "MQ135"], answer: "LM35" },
+      { q: "Which communication module is used in IoT for SIM-based internet?", options: ["ESP8266", "SIM800L", "HC-05"], answer: "SIM800L" },
+      { q: "Which company developed Arduino?", options: ["Intel", "Massimo Banzi & team", "Microsoft"], answer: "Massimo Banzi & team" },
+      { q: "Which wireless technology is widely used in smart homes?", options: ["Zigbee", "CDMA", "DSL"], answer: "Zigbee" },
+      { q: "What does MQTT stand for?", options: ["Message Queue Telemetry Transport", "Multi Query Transfer Tool", "Main Queue Transfer Text"], answer: "Message Queue Telemetry Transport" },
+      { q: "Which IoT board has Wi-Fi built in?", options: ["Arduino Uno", "ESP32", "Raspberry Pi Pico"], answer: "ESP32" },
+      { q: "Which gas sensor is used for air quality monitoring?", options: ["MQ135", "DHT11", "BMP180"], answer: "MQ135" },
+      { q: "Which memory is non-volatile?", options: ["RAM", "ROM", "Cache"], answer: "ROM" },
+      { q: "Which layer of IoT architecture includes sensors?", options: ["Perception Layer", "Network Layer", "Application Layer"], answer: "Perception Layer" },
+      { q: "Which is an example of wearable IoT?", options: ["Fitbit", "MS Word", "Photoshop"], answer: "Fitbit" },
+      { q: "What does RFID stand for?", options: ["Radio Frequency Identification", "Random File ID", "Rapid Function IoT Device"], answer: "Radio Frequency Identification" },
+      { q: "Which of these is a low-power IoT network protocol?", options: ["LoRaWAN", "Ethernet", "HDMI"], answer: "LoRaWAN" },
+      { q: "Which IoT device is used in agriculture?", options: ["Soil Moisture Sensor", "CD Drive", "Scanner"], answer: "Soil Moisture Sensor" },
+      { q: "Which board is more powerful than Arduino Uno?", options: ["ESP32", "MS Paint", "Notepad"], answer: "ESP32" },
+      { q: "Which software is used to program Arduino?", options: ["Arduino IDE", "MS PowerPoint", "Photoshop"], answer: "Arduino IDE" },
+      { q: "Which IoT application helps in smart cities?", options: ["Smart Traffic Management", "Word Processor", "CD Burning"], answer: "Smart Traffic Management" },
+      { q: "Which pin type on Arduino is used for analog input?", options: ["A0–A5", "D0–D13", "RX–TX"], answer: "A0–A5" },
+      { q: "Which company developed Raspberry Pi?", options: ["Raspberry Pi Foundation", "Intel", "Dell"], answer: "Raspberry Pi Foundation" },
+      { q: "Which IoT protocol works on publish-subscribe model?", options: ["MQTT", "HTTP", "FTP"], answer: "MQTT" },
+      { q: "Which sensor detects light intensity?", options: ["LDR", "LM35", "BMP180"], answer: "LDR" }
+    ];
+
+    // Shuffle and pick 7 random questions
+    const shuffled = questions.sort(() => 0.5 - Math.random()).slice(0, 7);
+
+    // Render questions
+    const form = document.getElementById("quizForm");
+    shuffled.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.innerHTML = `
+        <p class="question">${i+1}. ${q.q}</p>
+        ${q.options.map(opt => `
+          <label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label><br>
+        `).join("")}
+      `;
+      form.appendChild(div);
+    });
+
+    function submitQuiz() {
+      let score = 0, results = [];
+      shuffled.forEach((q, i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selected) {
+          if (selected.value === q.answer) {
+            score++;
+          } else {
+            results.push({question: q.q, correct: q.answer, chosen: selected.value});
+          }
+        } else {
+          results.push({question: q.q, correct: q.answer, chosen: "Not answered"});
+        }
       });
 
-      let result = document.getElementById("result");
-      if(correct >= 3) {
-        result.innerHTML = `✅ You got ${correct}/${total}!<br> You have good knowledge 🚀.<br> Enhance it further by joining our workshop 🎯`;
-        result.style.color = "#4ADE80";
-      } else {
-        result.innerHTML = `❌ You got only ${correct}/${total}.<br> Don’t worry 😅 Improve your knowledge by joining our workshop 📚`;
-        result.style.color = "#F87171";
-      }
+      // Save results
+      localStorage.setItem("quizScore", score);
+      localStorage.setItem("quizTotal", shuffled.length);
+      localStorage.setItem("quizReview", JSON.stringify(results));
+
+      window.location.href = "result.html";
     }
   </script>
 </body>
 </html>
-

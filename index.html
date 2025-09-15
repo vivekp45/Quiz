@@ -2,21 +2,86 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>IoT Quiz</title>
+  <title>IoT Quiz 🚀</title>
   <style>
-    body { font-family: 'Poppins', sans-serif; background: #f4f9ff; text-align: center; }
-    .quiz-box { background: white; width: 60%; margin: 40px auto; padding: 20px; border-radius: 15px; box-shadow: 0px 5px 20px rgba(0,0,0,0.1); }
-    h1 { color: #0077cc; }
-    button { padding: 10px 20px; border: none; border-radius: 8px; background: #0077cc; color: white; cursor: pointer; margin-top: 20px; }
-    button:hover { background: #005fa3; }
-    .question { font-weight: bold; margin: 15px 0; }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #6EE7B7 0%, #3B82F6 100%);
+      margin: 0; padding: 0;
+      display: flex; justify-content: center; align-items: center;
+      min-height: 100vh;
+    }
+    .quiz-box {
+      background: #fff;
+      width: 90%; max-width: 700px;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0px 10px 30px rgba(0,0,0,0.15);
+      animation: fadeIn 1s ease-in-out;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      color: #3B82F6;
+      margin-bottom: 10px;
+    }
+    p.subtitle {
+      text-align: center;
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 25px;
+    }
+    .question {
+      font-weight: 600;
+      margin: 20px 0 10px;
+      color: #111;
+    }
+    label {
+      display: block;
+      background: #f4f9ff;
+      margin: 8px 0;
+      padding: 10px 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+    label:hover {
+      background: #dbeafe;
+      transform: scale(1.02);
+    }
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #3B82F6, #2563EB);
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 25px;
+      transition: transform 0.2s ease-in-out;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, #2563EB, #1D4ED8);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
   <div class="quiz-box">
     <h1>🚀 IoT Knowledge Quiz</h1>
+    <p class="subtitle">Answer 7 questions to test your IoT skills 💡</p>
     <form id="quizForm"></form>
-    <button onclick="submitQuiz()">Submit</button>
+    <button onclick="submitQuiz()">Submit Quiz ✅</button>
   </div>
 
   <script>
@@ -48,17 +113,17 @@
       { q: "Which sensor detects light intensity?", options: ["LDR", "LM35", "BMP180"], answer: "LDR" }
     ];
 
-    // Shuffle and pick 7 random questions
+    // Pick 7 random
     const shuffled = questions.sort(() => 0.5 - Math.random()).slice(0, 7);
 
-    // Render questions
+    // Render
     const form = document.getElementById("quizForm");
     shuffled.forEach((q, i) => {
       const div = document.createElement("div");
       div.innerHTML = `
         <p class="question">${i+1}. ${q.q}</p>
         ${q.options.map(opt => `
-          <label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label><br>
+          <label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label>
         `).join("")}
       `;
       form.appendChild(div);
@@ -79,7 +144,6 @@
         }
       });
 
-      // Save results
       localStorage.setItem("quizScore", score);
       localStorage.setItem("quizTotal", shuffled.length);
       localStorage.setItem("quizReview", JSON.stringify(results));
@@ -89,3 +153,5 @@
   </script>
 </body>
 </html>
+
+

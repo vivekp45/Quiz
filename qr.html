@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IoT Workshop Quiz</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #6EE7B7, #3B82F6);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    .quiz-box {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 20px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0px 8px 20px rgba(0,0,0,0.3);
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    .question {
+      margin: 15px 0;
+      font-size: 18px;
+      text-align: left;
+    }
+    label {
+      display: block;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 8px;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    label:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: #FACC15;
+      color: #000;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #FBBF24;
+    }
+    #result {
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-box">
+    <h1>🔥 IoT Quick Quiz 🔥</h1>
+    <form id="quizForm">
+
+      <div class="question">
+        <p>1. What does IoT stand for?</p>
+        <label><input type="radio" name="q1" value="wrong"> Internet of Technology</label>
+        <label><input type="radio" name="q1" value="correct"> Internet of Things</label>
+        <label><input type="radio" name="q1" value="wrong"> Intelligent Online Tools</label>
+      </div>
+
+      <div class="question">
+        <p>2. Which protocol is commonly used in IoT devices for lightweight messaging?</p>
+        <label><input type="radio" name="q2" value="wrong"> HTTP</label>
+        <label><input type="radio" name="q2" value="correct"> MQTT</label>
+        <label><input type="radio" name="q2" value="wrong"> SMTP</label>
+      </div>
+
+      <div class="question">
+        <p>3. Which of these is an IoT application in agriculture?</p>
+        <label><input type="radio" name="q3" value="correct"> Smart irrigation systems</label>
+        <label><input type="radio" name="q3" value="wrong"> Social media apps</label>
+        <label><input type="radio" name="q3" value="wrong"> Video streaming</label>
+      </div>
+
+      <div class="question">
+        <p>4. Which microcontroller is widely used in IoT projects?</p>
+        <label><input type="radio" name="q4" value="wrong"> Pentium Processor</label>
+        <label><input type="radio" name="q4" value="correct"> Arduino / ESP32</label>
+        <label><input type="radio" name="q4" value="wrong"> Graphics Card</label>
+      </div>
+
+      <div class="question">
+        <p>5. In IoT, sensors are used to…</p>
+        <label><input type="radio" name="q5" value="correct"> Collect data from the environment</label>
+        <label><input type="radio" name="q5" value="wrong"> Play music</label>
+        <label><input type="radio" name="q5" value="wrong"> Edit videos</label>
+      </div>
+
+      <button type="button" onclick="checkQuiz()">Submit Answers</button>
+    </form>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function checkQuiz() {
+      let correct = 0;
+      let total = 5;
+      let answers = document.querySelectorAll("input[type=radio]:checked");
+      answers.forEach(ans => {
+        if(ans.value === "correct") correct++;
+      });
+
+      let result = document.getElementById("result");
+      if(correct >= 3) {
+        result.innerHTML = `✅ You got ${correct}/${total}!<br> You have good knowledge 🚀.<br> Enhance it further by joining our workshop 🎯`;
+        result.style.color = "#4ADE80";
+      } else {
+        result.innerHTML = `❌ You got only ${correct}/${total}.<br> Don’t worry 😅 Improve your knowledge by joining our workshop 📚`;
+        result.style.color = "#F87171";
+      }
+    }
+  </script>
+</body>
+</html>
